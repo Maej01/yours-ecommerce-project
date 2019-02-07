@@ -11,7 +11,7 @@
     <title>SignUp</title>
 </head>
 <body id="reg-section-body">
-    
+
     <section class="section registration-section center">
         <div class="container">
             <div class="card">
@@ -315,7 +315,7 @@
                         </div>
                     </div>    
                     <!--  -->
-                        <input class="btn-small blue" type="submit" name="submit" value="Register">
+                        <input class="btn-small blue" type="submit" name="register" value="Register">
                     <!--  -->
                 </form>
             </div>

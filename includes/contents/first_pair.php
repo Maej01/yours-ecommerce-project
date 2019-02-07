@@ -1,24 +1,32 @@
 <!--  -->
-<?php $siteroot = '/group_web';?>
+<?php 
+    $siteroot = '/group_web';
+
+    require_once $_SERVER['DOCUMENT_ROOT'].'/group_web/config.php';
+
+    session_start();
+?>
 <html lang="en">
 <head>
     <!-- requiring the headlinks -->
-    <link rel="stylesheet" href="/group_web/public_files/css/materialize.min.css">
+
+    <link rel="stylesheet" href="/group_web/public_files/css/materialize.min.css"> 
     <link rel="stylesheet" href="/group_web/public_files/iconfont/material-icons.css">
     <link rel="stylesheet" href="/group_web/public_files/web-fonts-with-css/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="/group_web/public_files/css/animate.min.css">
-    <link rel="stylesheet" href="/group_web/public_files/css/style.css">
-    <link rel="stylesheet" href="/group_web/public_files/css/jqzoom_style.css">
+    <link rel="stylesheet" href="/group_web/public_files/css/style.css"> 
+    <link rel="stylesheet" href="/group_web/public_files/css/jqzoom_style.css"> 
 
 </head>
 <body>
     
     <!-- requiring the header-->
     
-
     <!-- first pair section -->
     <section class="section_cont">
-        <a href="#">Back to previous page</a>
+        <br>
+        <br>
+        <a href="/group_web/index.php">Back to previous page</a>
         <div class="row">
             <!-- image section -->
             <div class="col s12 m4">
@@ -107,10 +115,23 @@
                         <label>Now:</label><span>USD $59.95</span>
                     </div>
                     <div class="col m6 buttons">
-                        <a href="/group_web/purchase_page.php" class="btn btn-small green darken-2">Buy it Now</a>
-                        <a href="#" class="btn btn-small blue orange-text">
+                        <!-- <a href='/group_web/charge.php'  class='btn btn-small green darken-2'>Buy it Now</a> -->
+                        <form action="/group_web/charge.php" method="post">
+                            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                data-key="<?php echo $stripe['publishable_key']; ?>"
+                                data-description="Make payment for Air Jordan"
+                                data-amount="59.95"
+                                data-label="Buy it Now"
+                                data-locale="auto">
+                            </script>
+                        </form>
+                         <a href="#" class="btn btn-small blue orange-text">
                             add to cart<i class="material-icons right">shopping_cart</i>
                         </a>
+                        
+                        
+
+
                     </div>
                 </div>
             </div>

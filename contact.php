@@ -27,7 +27,7 @@
                 </div>
             </li>
             <li>
-                <img src="public_files/images/sliderImg/contact-bg.png" alt="">
+                <img src="public_files/images/sliderImg/response.jpg" alt="">
                 <div class="caption right-align">
                     <h3 class="black-text text-lighten-3">Quick Response</h3>
                     <h5 class="orange-text text-lighten-2 hide-on-small-only">

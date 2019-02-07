@@ -1,7 +1,9 @@
 <?php
     $siteroot = '/group_web';
-    include 'login.inc.php';
+
+    // include ('login.inc.php');
     // session_start();
+    // echo "Welcome to the member's area, " . $_SESSION['loggedUser'] . "!";
 
     // if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     //     echo "Welcome to the member's area, " . $_SESSION['loggedUser'] . "!";
@@ -35,7 +37,7 @@
                 </div>
             </li>
             <li>
-                <img src="public_files/images/sliderImg/Apple-Responsive-Screen-Mockups-full.jpg" alt="">
+                <img src="public_files/images/sliderImg/any-device.jpg" alt="">
                 <div class="caption right-align">
                     <h3>Shop With Any Device</h3>
                     <h5 class="light grey-text text-lighten-3 hide-on-small-only">
@@ -70,7 +72,7 @@
         </div>
     </section>
 
-    <section class="section section-showcase">
+    <section class="section section-showcase center">
         <div class="row">
             <!-- categories -->
             <div class="col s12 m2 categories">
@@ -128,7 +130,7 @@
                         <h3 class="center orange-text">$80</h3>
                         <h5 class="center"><a href="includes/contents/first_pair.php" class="black-text">JORDAN AIR</a></h5>
                         <a href="#" class="btn btn-small blue white-text push-m2">
-                            add to cart<i class="material-icons orange-text right">shopping_cart</i>
+                            add to cart<!-- <i class="material-icons orange-text right">shopping_cart</i> -->
                         </a>
 
                     </div>
@@ -141,7 +143,7 @@
                         <h3 class="center orange-text">$76</h3>
                         <h5 class="center"><a href="includes/contents/second_pair.php" class="black-text">ADIDAS</a></h5>
                         <a href="#" class="btn btn-small blue white-text push-m2">
-                            add to cart<i class="material-icons orange-text right">shopping_cart</i>
+                            add to cart<!-- <i class="material-icons orange-text right">shopping_cart</i> -->
                         </a>
                     </div>
                 </div>
@@ -153,7 +155,7 @@
                         <h3 class="center orange-text"><del>$90</del>  $80</h3>
                         <h5 class="center"><a href="includes/contents/third_pair.php" class="black-text">ADIDAS YEEZY BOOST</a></h5>
                         <a href="#" class="btn btn-small blue white-text push-m2">
-                            add to cart<i class="material-icons orange-text right">shopping_cart</i>
+                            add to cart<!-- <i class="material-icons orange-text right">shopping_cart</i> -->
                         </a>
                     </div>
                 </div>
@@ -165,7 +167,7 @@
                         <h3 class="center orange-text">$150</h3>
                         <h5 class="center"><a href="includes/contents/fourth_pair.php" class="black-text">NIKE AIR VAPOUR MAX</a></h5>
                         <a href="#" class="btn btn-small blue white-text push-m2">
-                            add to cart<i class="material-icons orange-text right">shopping_cart</i>
+                            add to cart<!-- <i class="material-icons orange-text right">shopping_cart</i> -->
                         </a>
                     </div>
                 </div>
@@ -176,9 +178,9 @@
                             <img src="public_files/images/products/sneakers/shield-man-shoe.jpg">
                         </div>
                         <h3 class="center orange-text">$45</h3>
-                        <h5 class="center"><a href="#" class="black-text">SHIELD MAN SHOE</a></h5>
+                        <h5 class="center"><a href="includes/contents/fifth_pair.php" class="black-text">SHIELD MAN SHOE</a></h5>
                         <a href="#" class="btn btn-small blue white-text push-m2">
-                            add to cart<i class="material-icons orange-text right">shopping_cart</i>
+                            add to cart<!-- <i class="material-icons orange-text right">shopping_cart</i> -->
                         </a>
                     </div>
                 </div>
@@ -188,9 +190,9 @@
                             <img src="public_files/images/products/sneakers/vans_3.JPG">
                         </div>
                         <h3 class="center orange-text">$67.99</h3>
-                        <h5 class="center"><a href="#" class="black-text">VANS</a></h5>
+                        <h5 class="center"><a href="includes/contents/sixth_pair.php" class="black-text">VANS</a></h5>
                         <a href="#" class="btn btn-small blue white-text push-m2">
-                            add to cart<i class="material-icons orange-text right">shopping_cart</i>
+                            add to cart<!-- <i class="material-icons orange-text right">shopping_cart</i> -->
                         </a>
                     </div>
                 </div>
@@ -200,9 +202,9 @@
                             <img src="public_files/images/products/sneakers/nike_acc.jpg">
                         </div>
                         <h3 class="center orange-text">$57</h3>
-                        <h5 class="center"><a href="#" class="black-text">NIKE SPON</a></h5>
+                        <h5 class="center"><a href="includes/contents/seventh_pair.php" class="black-text">NIKE SPON</a></h5>
                         <a href="#" class="btn btn-small blue white-text push-m2">
-                            add to cart<i class="material-icons orange-text right">shopping_cart</i>
+                            add to cart<!-- <i class="material-icons orange-text right">shopping_cart</i> -->
                         </a>
                     </div>
                 </div>
@@ -214,7 +216,7 @@
                         <h3 class="center orange-text">$50</h3>
                         <h5 class="center"><a href="#" class="black-text">NIKE AIR</a></h5>
                         <a href="#" class="btn btn-small blue white-text push-m2">
-                            add to cart<i class="material-icons orange-text right">shopping_cart</i>
+                            add to cart<!--<i class="material-icons orange-text right">shopping_cart</i>-->
                         </a>
                     </div>
                 </div>

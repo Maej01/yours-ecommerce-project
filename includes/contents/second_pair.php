@@ -18,7 +18,7 @@
 
     <!-- first pair section -->
     <section class="section_cont">
-        <a href="#">Back to previous page</a>
+        <a href="/group_web/index.php">Back to previous page</a>
         <div class="row">
             <!-- image section -->
             <div class="col s12 m4">

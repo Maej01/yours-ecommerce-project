@@ -1,5 +1,9 @@
 <?php
-    // include '/group_web/php_scripts/login.php';
+    include ('login.inc.php');
+
+    // if(isset($_SESSION['loggedUser'])){
+    //     echo '<h1>Welcome' .$_SESSION '</h1>';
+    // }
 ?>
 
 <html lang="en">
@@ -17,6 +21,7 @@
             <h4 class="center blue-text lighten-2">Please Login</h1>
             <!-- LOGIN FORM -->
             <form method="POST" action="login.inc.php">
+                <span><?php echo $errorMessage; ?></span>
                 <div class="input-field">
                     <i class="material-icons prefix">account_circle</i>
                     <label for="icon_prefix">Username or Email</label>
@@ -30,7 +35,6 @@
                 <!-- <div class="col s12 m12 push-s3 push-m3"> -->
                     <input class="btn btn-large btn-extend blue white-text" type="submit" value="login" name="loginButton">
                 <!-- </div> -->
-                
             </form>
         </div>
     </section>

@@ -3,6 +3,9 @@
      <!-- requiring the headlinks -->
      <?php require 'includes/templates/headlinks.php'; ?>
 
+     <?php require_once('./config.php'); ?>
+
+
     <title>Purchase | YOURS</title>
 </head>
 <body>
@@ -12,6 +15,14 @@
     <!-- purchase page section -->
     <section class="section purchase-section center">
         <div class="row">
+        <form action="charge.php" method="post">
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="<?php echo $stripe['publishable_key']; ?>"
+                data-description="Access for a year"
+                data-amount="5000"
+                data-locale="auto"></script>
+        </form>
+            <!--
             <div class="col s4 m4">
                 <div class="card-panel">
                     <div class="card-title green">Fill in the purchase form</div>
@@ -66,9 +77,9 @@
                     
                     <input type="submit" name="makeOrder" value="order" class="btn blue" action="purchase.inc.php">
                 </div>
-            </div>
+            </div> -->
         </div>
-    </section>
+    </section> 
 
     <!-- requiring the header-->
     <?php require 'includes/templates/jsscripts.php'; ?>

@@ -1,31 +1,49 @@
 <?php
 
 include 'conn/conn.php';
-// session_start();
+
+$errorMessage = ''; //variable to store error message
 
 if(isset($_POST['loginButton'])){
-    $loginUsername = $_POST['loginUsername'];
-    $loginPassword = $_POST['loginPassword'];
+    if(empty($_POST['loginUsername']) || empty($_POST['loginPassword'])){
+        $errorMessage = "Username or Password is invalid";
+    }
+    else{
+        //Define username and password
+        $loginUsername = $_POST['loginUsername'];
+        $loginPassword = $_POST['loginPassword'];
 
-    // selecting query
-    $sql = "SELECT * FROM registration_tbl WHERE Email='$loginUsername' AND User_Password='$loginPassword'";
-    $result = $conn->query($sql);
+        //decrypting the password
+        $password = md5($loginPassword);
 
-    if(mysqli_num_rows($result) > 0) {
-        if ($row = $result->fetch_assoc()) {
+        // selecting query
+        $sql = "SELECT * FROM CustomersTBL WHERE Email='$loginUsername' AND User_Password='$password' ";
+        $result = $conn->query($sql);
 
-            $_SESSION['loggedin'] = true;
-            $_SESSION['loggedUser'] = $row['Email'];
-            
-            // $_SESSION['id'] = $row['ID'];
-            header("Location: index.php?loginsuccess");
+        if(mysqli_num_rows($result) > 0) {
+            if ($row = $result->fetch_assoc()) {
+
+                session_start();
+                $_SESSION['loggedin'] = true;
+                $_SESSION['loggedUser'] = $loginUsername;
+
+                // if(md5($_SESSION['pwd']) == $res["hashstring"])
+                
+                // $_SESSION['id'] = $row['ID'];
+                header("Location: index.php?loginsuccess");
+                exit();
+            }
+        }else {
+            // header("Location: login.php?loginfailed");
+            $errorMessage = "Username or Password is invalid";
             exit();
         }
-    }else {
-        header("Location: login.php?loginfailed");
-        exit();
     }
+    
 }
+// else{
+//     echo "You are required to login. <a href='login.php'>Try again</a>";
+// }
 
 // logout function
 // function logOut() {

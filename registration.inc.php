@@ -2,11 +2,12 @@
 
 include 'conn/conn.php';
 
-// set user registration function
-// function setUserRegistration() {
-// }
+//email function 
+ini_set("SMTP", "smtp.server.com");//confirm smtp
 
-if(isset($_POST['submit'])) {
+session_start();
+
+if(isset($_POST['register'])) {
     $regFirstName = $_POST['regFirstName']; 
     $regLastName = $_POST['regLastName']; 
     $regEmail = $_POST['regEmail']; 
@@ -29,14 +30,30 @@ if(isset($_POST['submit'])) {
             $hashKey = md5($regPassword);
     
             // query
-            $sql = "INSERT INTO registration_tbl (First_Name, Last_Name, Email, Country, Street, City, State, Zip_Code,	User_Password) 
-            VALUES('$regFirstName','$regLastName','$regEmail','$regCountry','$regStAddress','$regCity','$regState','$regZip','$hashKey')";
+            $sql = "INSERT INTO CustomersTBL (First_Name, Last_Name, Username, Email, Country, Street, City, State, Zip_Code,	User_Password) 
+            VALUES('$regFirstName','$regLastName','$regEmail','$regEmail','$regCountry','$regStAddress','$regCity','$regState','$regZip','$hashKey')";
 
             // executing the query
             $result = $conn->query($sql);
 
-            echo '<h1>NEW RECORD ADDED</h1>';
-            header('Location: registration.php'); //redirecting to the registration page
+                
+            $to=$regEmail;
+            // Your subject
+            $subject="MADUS ACTIVATION REQUIRED";
+            // From
+            $header="from: MADUS <madus@madus.com>";
+            // Your message
+            $message="Your Comfirmation link\r\n";
+            $message.="Click on this link to activate your account\r\n";
+            $message.="You can not login to your new account until you have confirmed your activation\r\n";
+            //$message.="http://test.com/activation-confirmation.php?passkey=$securecode";
+            // send email
+            $sentmail = mail($to,$subject,$message,$header);
+
+
+
+
+            header('Location: index.php'); //redirecting to the registration page
         }else{
             echo '<h1>Password not match</h1>';
         }
