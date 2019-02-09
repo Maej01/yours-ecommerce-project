@@ -1,15 +1,66 @@
 <?php
-    $siteroot = '/group_web';
+    session_start();
+    include 'conn/conn.php';
 
-    // include ('login.inc.php');
-    // session_start();
-    // echo "Welcome to the member's area, " . $_SESSION['loggedUser'] . "!";
 
-    // if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-    //     echo "Welcome to the member's area, " . $_SESSION['loggedUser'] . "!";
-    // } else {
-    //     echo "Please log in first to see this page.";
-    // }
+    if(isset($_POST["addToCart"])){
+
+        //$_SESSION["shoppingCart"];
+
+        //creating a session and checking if it has some data   
+        if(isset($_SESSION["shoppingCart"])){
+            //getting the data column
+            $item_array_id = array_column($_SESSION["shoppingCart"], "item_id");
+            if(!in_array($_GET["ProductID"], $item_array_id)){
+                //count the number of elements in the cart and store in the $count variables
+                $count = count($_SESSION["shoppingCart"]);
+                $item_list_array  = array(
+                    'item_id' => $_GET["ProductID"],
+                    'item_name' => $_POST["hiddenName"],
+                    'item_price' => $_POST["hiddenPrice"],
+                    'item_quantity' => $_POST["quantity"]
+                );
+                //storing the item into the cart
+                $_SESSION["shoppingCart"][$count] = $item_list_array;
+            }else{
+                //print error message a match if found
+                echo '<script>alert("This Item has already been added")</script>';
+                echo '<script>window.location="index.php"</script>';
+            }
+
+        }
+        else{
+            $item_list_array  = array(
+                'item_id'       => $_GET["ProductID"],
+                'item_name'     => $_POST["hiddenName"],
+                'item_price'    => $_POST["hiddenPrice"],
+                'item_quantity' => $_POST["quantity"]
+            );
+            //storing these data to the session shopping cart variable
+            $_SESSION["shoppingCart"][0] = $item_list_array;
+        }
+    }
+
+
+    //getting the action
+    if(isset($_GET["action"])){
+        //check if the action was a delete request
+        if($_GET["action"] ==  "delete"){
+            $_SESSION['shoppingCart'];
+            //looping throught the data
+            foreach($_SESSION["shoppingCart"] as $keys => $values){
+                if($values['item_id'] == $_GET["ProductID"]){
+                    //destroying the data
+                    unset($_SESSION["shoppingCart"][$keys]);
+                    echo '<script>alert("item removed from cart")</script>';
+                    header('Location: index.php');
+                }
+            }
+
+        }
+
+    }
+
 ?>
 
 <html lang="en">
@@ -122,107 +173,92 @@
             <h4 id="trending-title">Trending</h4>
             <div class="col s12 m9">
                 <!-- first set -->
-                <div class="col s12 m3 sneakers">
-                    <div class="card">
-                        <div class="card-image center">
-                            <img src="public_files/images/products/sneakers/Air_Jordan_XVI.jpg">
-                        </div>
-                        <h3 class="center orange-text">$80</h3>
-                        <h5 class="center"><a href="includes/contents/first_pair.php" class="black-text">JORDAN AIR</a></h5>
-                        <a href="#" class="btn btn-small blue white-text push-m2">
-                            add to cart<!-- <i class="material-icons orange-text right">shopping_cart</i> -->
-                        </a>
+                <?php 
+                    $query = "SELECT * FROM ProductsTBL ORDER BY ProductID ASC";
 
-                    </div>
-                </div>
-                <div class="col s12 m3 sneakers">
-                    <div class="card">
-                        <div class="card-image center">
-                            <img src="public_files/images/products/sneakers/Adidas.jpg">
+                    $result = $conn->query($query);
+                    //check if their is match
+                    if(mysqli_num_rows($result) > 0){
+                        while($row = mysqli_fetch_array($result))
+                        {
+                ?>
+                    <div class="col s12 m3 products">
+                        <div class="row">
+                            <div class="card">
+                                <form method="POST" action="index.php?action=add&ProductID=<?php echo $row["ProductID"]; ?>">
+                                    <div class="card-image center">
+                                        <img src="<?php echo "data:image/jpeg;base64,". base64_encode($row["Image"]); ?>">
+                                    </div>
+                                    <div class="product-details">
+                                        <h5 class="center"><a href="includes/contents/first_pair.php" class="black-text">
+                                                <?php echo $row["Name"]; ?>
+                                            </a>
+                                        </h5> 
+                                        <h3 class="center orange-text"><?php echo $row["Price"]; ?></h3>
+                                        
+                                        <input type="text" name="quantity" value="1">
+                                        <input type="hidden" name="hiddenName" value="<?php echo $row["Name"]; ?>">
+                                        <input type="hidden" name="hiddenPrice" value="<?php echo $row["Price"]; ?>">
+                                        <input type="submit" name="addToCart" style="margin-bottom: 5px;" class="btn btn-small blue white-text push-m2" value="add to cart">
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <h3 class="center orange-text">$76</h3>
-                        <h5 class="center"><a href="includes/contents/second_pair.php" class="black-text">ADIDAS</a></h5>
-                        <a href="#" class="btn btn-small blue white-text push-m2">
-                            add to cart<!-- <i class="material-icons orange-text right">shopping_cart</i> -->
-                        </a>
                     </div>
-                </div>
-                <div class="col s12 m3 sneakers">
-                    <div class="card">
-                        <div class="card-image center">
-                            <img src="public_files/images/products/sneakers/Adidas-Yeezy-Boost-350.jpg">
-                        </div>
-                        <h3 class="center orange-text"><del>$90</del>  $80</h3>
-                        <h5 class="center"><a href="includes/contents/third_pair.php" class="black-text">ADIDAS YEEZY BOOST</a></h5>
-                        <a href="#" class="btn btn-small blue white-text push-m2">
-                            add to cart<!-- <i class="material-icons orange-text right">shopping_cart</i> -->
-                        </a>
-                    </div>
-                </div>
-                <div class="col s12 m3 sneakers">
-                    <div class="card">
-                        <div class="card-image center">
-                            <img src="public_files/images/products/sneakers/nike-air-vapormax-plus.jpg">
-                        </div>
-                        <h3 class="center orange-text">$150</h3>
-                        <h5 class="center"><a href="includes/contents/fourth_pair.php" class="black-text">NIKE AIR VAPOUR MAX</a></h5>
-                        <a href="#" class="btn btn-small blue white-text push-m2">
-                            add to cart<!-- <i class="material-icons orange-text right">shopping_cart</i> -->
-                        </a>
-                    </div>
-                </div>
-                <!-- second set -->
-                <div class="col s12 m3 sneakers">
-                    <div class="card">
-                        <div class="card-image center">
-                            <img src="public_files/images/products/sneakers/shield-man-shoe.jpg">
-                        </div>
-                        <h3 class="center orange-text">$45</h3>
-                        <h5 class="center"><a href="includes/contents/fifth_pair.php" class="black-text">SHIELD MAN SHOE</a></h5>
-                        <a href="#" class="btn btn-small blue white-text push-m2">
-                            add to cart<!-- <i class="material-icons orange-text right">shopping_cart</i> -->
-                        </a>
-                    </div>
-                </div>
-                <div class="col s12 m3 sneakers">
-                    <div class="card">
-                        <div class="card-image center">
-                            <img src="public_files/images/products/sneakers/vans_3.JPG">
-                        </div>
-                        <h3 class="center orange-text">$67.99</h3>
-                        <h5 class="center"><a href="includes/contents/sixth_pair.php" class="black-text">VANS</a></h5>
-                        <a href="#" class="btn btn-small blue white-text push-m2">
-                            add to cart<!-- <i class="material-icons orange-text right">shopping_cart</i> -->
-                        </a>
-                    </div>
-                </div>
-                <div class="col s12 m3 sneakers">
-                    <div class="card">
-                        <div class="card-image center">
-                            <img src="public_files/images/products/sneakers/nike_acc.jpg">
-                        </div>
-                        <h3 class="center orange-text">$57</h3>
-                        <h5 class="center"><a href="includes/contents/seventh_pair.php" class="black-text">NIKE SPON</a></h5>
-                        <a href="#" class="btn btn-small blue white-text push-m2">
-                            add to cart<!-- <i class="material-icons orange-text right">shopping_cart</i> -->
-                        </a>
-                    </div>
-                </div>
-                <div class="col s12 m3 sneakers">
-                    <div class="card">
-                        <div class="card-image center">
-                            <img src="public_files/images/products/sneakers/nike_men_air.jpg">
-                        </div>
-                        <h3 class="center orange-text">$50</h3>
-                        <h5 class="center"><a href="#" class="black-text">NIKE AIR</a></h5>
-                        <a href="#" class="btn btn-small blue white-text push-m2">
-                            add to cart<!--<i class="material-icons orange-text right">shopping_cart</i>-->
-                        </a>
-                    </div>
-                </div>
+                <?php
+                        }
+                    }
+                ?> 
             </div> <!-- end of the trendin column -->
         </div> <!-- end of main row -->
     </section>
+
+    <table>
+        <tr>
+            <th width="40%">Item Name</th>
+            <th width="10%">Quantity</th>
+            <th width="20%">Price</th>
+            <th width="15%">Total</th>
+            <th width="5%">Action</th>
+        </tr>
+        <?php 
+
+            
+            //check if cart is not empty
+            if(!empty($_SESSION["shoppingCart"])){
+                //store the total of item price
+                $total = 0;
+
+                foreach($_SESSION["shoppingCart"] as $keys => $values){
+    
+        ?>
+        <tr>
+                <td><?php echo $values['item_name']; ?></td>
+                <td><?php echo $values['item_quantity']; ?></td>
+                <td>$ <?php echo $values['item_price']; ?></td>
+                <td>$ <?php echo number_format($values['item_quantity'] * $values['item_price'], 2); ?></td>
+                <td><a href="index.php?action=delete&ProductID=<?php echo $values['item_id']; ?>">
+                    <span class="red-text">Remove</span>
+                </a></td>
+        </tr>
+        <?php
+                    //getting the total price of a product
+                    $total = $total + ($values['item_quantity'] * $values['item_price']);
+                }
+        ?>
+            <tr>
+                <!-- <td class="right">Total</td> -->
+                <td class="right">Total $ <?php echo number_format($total, 2); ?></td>
+            </tr>
+        <?php
+            }
+            else{
+                echo '<h5>The cart is empty!</h5>';
+            }
+        ?>
+    </table>
+    <br>
+    <br>
     
     <!-- requiring the footer-->
     <?php require 'includes/templates/footer.php'; ?>

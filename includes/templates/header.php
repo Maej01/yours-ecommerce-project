@@ -1,5 +1,4 @@
 <?php
-    session_start();
     // if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     //     echo "Welcome to the member's area, " . $_SESSION['loggedUser'] . "!";
     // } else {
@@ -80,26 +79,4 @@
             </div>
         </div>
     </nav>
-
-    <!-- slider showcase -->
-    <!-- <div class="showcase container">
-        <div class="row">
-            <div class="col s12 main-text">
-                <h4>E-Shoping Made Simple</h4>
-                 <h1>Jordan F5</h1>
-                <p class="flow-text">
-                    This product is now $80
-                    Shop freely at any location and expect you goods in a short time
-                </p> 
-                <a href="#" class="btn btn-large white black-text">Get It Now</a>
-                <a href="#" class="white-text">
-                    <i class="material-icons medium scroll-icon">arrow_drop_down_circle</i>
-                </a>
-
-                <a href="#top" id="topButton" class="white-text">
-                    <i class="material-icons small scroll-icon-top">arrow_upward</i>
-                </a>
-            </div>
-        </div>
-    </div> -->
 </header> 

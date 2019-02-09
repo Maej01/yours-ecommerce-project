@@ -30,7 +30,7 @@ if(isset($_POST['register'])) {
             $hashKey = md5($regPassword);
     
             // query
-            $sql = "INSERT INTO CustomersTBL (First_Name, Last_Name, Username, Email, Country, Street, City, State, Zip_Code,	User_Password) 
+            $sql = "INSERT INTO CustomersTBL (First_Name, Last_Name, Username, Email, Country, Street, City, State, Zip_Code, User_Password) 
             VALUES('$regFirstName','$regLastName','$regEmail','$regEmail','$regCountry','$regStAddress','$regCity','$regState','$regZip','$hashKey')";
 
             // executing the query
